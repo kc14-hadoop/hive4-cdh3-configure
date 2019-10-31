@@ -1,0 +1,21 @@
+<settings>
+
+    <localRepository>${BASEDIR}/generated/resources/m2/repository</localRepository>
+
+    <!-- ... other settings here ... -->
+
+    <profiles>
+        <profile>
+            <id>downloadSources</id>
+            <properties>
+                <downloadSources>true</downloadSources>
+                <downloadJavadocs>true</downloadJavadocs>
+            </properties>
+        </profile>
+    </profiles>
+
+    <activeProfiles>
+        <activeProfile>downloadSources</activeProfile>
+    </activeProfiles>
+
+</settings>

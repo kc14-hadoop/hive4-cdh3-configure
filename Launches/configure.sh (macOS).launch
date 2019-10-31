@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<launchConfiguration type="org.eclipse.ui.externaltools.ProgramLaunchConfigurationType">
+<mapAttribute key="org.eclipse.debug.core.environmentVariables">
+<mapEntry key="DOWNLOADS_DIR" value="${project_loc:/docker-hive}/Downloads"/>
+<mapEntry key="HIVE_PROJECT_LOC" value="${project_loc:/hive}"/>
+<mapEntry key="PYTHON3" value="/usr/local/bin/python3"/>
+<mapEntry key="READLINK" value="/usr/local/bin/greadlink"/>
+</mapAttribute>
+<listAttribute key="org.eclipse.debug.ui.favoriteGroups">
+<listEntry value="org.eclipse.ui.externaltools.launchGroup"/>
+</listAttribute>
+<stringAttribute key="org.eclipse.ui.externaltools.ATTR_LOCATION" value="${project_loc:/hive4-cdh6-configure}/configure.sh"/>
+</launchConfiguration>

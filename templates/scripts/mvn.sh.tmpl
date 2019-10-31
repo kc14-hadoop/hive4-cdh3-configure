@@ -1,0 +1,32 @@
+#! /usr/bin/env bash
+
+# WRITING SAFE SHELL SCRIPTS
+set -e
+set -u
+set -o pipefail
+# set -o verbose
+
+# shopt -s failglob
+shopt -s nullglob
+shopt -s extglob
+
+MVN="${MVN:=mvn}"
+
+HIVE_PROJECT_LOC="${HIVE_PROJECT_LOC}"
+DOWNLOADS_DIR="${DOWNLOADS_DIR}"
+
+export JAVA_HOME="$${JAVA_HOME?:Is not set\!}"
+
+cd "${HIVE_PROJECT_LOC}"
+"${MVN}" --settings ${BASEDIR}/generated/resources/m2/settings.xml \
+  clean package \
+  eclipse:clean eclipse:eclipse \
+  -P dist \
+  --activate-profiles itests \
+  -DskipTests \
+  -DdownloadSources \
+  -DdownloadJavadocs \
+  "$@"
+
+# Copy the fresh built vanilla hive into the Downloads directory in the docker-hive project
+cp "$${HIVE_PROJECT_LOC}/packaging/target/apache-hive-4.0.0-SNAPSHOT-bin.tar.gz" "$${DOWNLOADS_DIR}"

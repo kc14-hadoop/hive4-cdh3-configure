@@ -1,0 +1,1 @@
+configure.sh will create mvn.sh into this directory.
