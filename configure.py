@@ -13,11 +13,18 @@ MVN_SH =            "generated/scripts/mvn.sh"
 
 TOP_LVL_MVN_SH =    "mvn.sh"
 
-def setBasedir (argv):
+HIVE_PROJECT_LOC =  "hive4-cdh6"
+DOWNLOADS_DIR =     "docker-hive/Downloads"
+
+def setEnv (argv):
     scriptpath = os.path.realpath(argv[0])
     scriptdir = os.path.dirname(scriptpath)
     basedir = scriptdir
+    workspacedir = os.path.dirname(basedir)
+
     os.environ['BASEDIR'] = basedir
+    os.environ['HIVE_PROJECT_LOC'] = os.path.realpath (os.path.join (workspacedir, HIVE_PROJECT_LOC))
+    os.environ['DOWNLOADS_DIR'] = os.path.realpath (os.path.join (workspacedir, DOWNLOADS_DIR))
 
 def readTemplate (filename):
     with open(filename) as f:
@@ -58,7 +65,7 @@ exec {mvnscript}
 # Entrypoint
 
 def main(argv):
-    setBasedir(argv)
+    setEnv(argv)
 
     # Business Logic
     createSettingsXML()

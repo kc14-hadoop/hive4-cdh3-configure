@@ -18,7 +18,7 @@ DOWNLOADS_DIR="${DOWNLOADS_DIR}"
 export JAVA_HOME="$${JAVA_HOME?:Is not set\!}"
 
 cd "${HIVE_PROJECT_LOC}"
-"${MVN}" --settings ${BASEDIR}/generated/resources/m2/settings.xml \
+"${MVN}" --settings "${BASEDIR}/generated/resources/m2/settings.xml" \
   clean package \
   eclipse:clean eclipse:eclipse \
   -P dist \
