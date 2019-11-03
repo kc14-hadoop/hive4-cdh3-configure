@@ -21,13 +21,20 @@ First clone these projects into the same workspace directory:
 * Forked Vanilla Apache Hive: https://github.com/kc14-hadoop/hive4-cdh6.git
 * Setup for maven: https://github.com/kc14-hadoop/hive4-cdh6-configure.git
 
+# Build Hive and Deploy Binary Distribution
+
 After you have checked out all these projects:
 
 1. `cd hive4-cdh6-configure`
 2. `./configure.sh` - Should create `mvn.sh`
 3. `./mvn.sh` - Should build hive and copy the bin distribution into the `Downloads` dir in `docker-hive`
-4. `cd ../docker-hadoop/bin`
-5. `./docker-create-br1.sh` - Set up a docker network bridge `br1` as default network
+
+# Create Default Network
+
+1. `cd ../docker-hadoop/bin`
+2. `./docker-create-br1.sh` - Set up a docker network bridge `br1` as default network
+
+# Bring it all up
 
 Now you are ready to build and start the necessary docker images:
 
@@ -38,3 +45,22 @@ Now you are ready to build and start the necessary docker images:
 Now all docker images are built and the corresponding containers are up and running. You can stop the containers in the terminal with `<ctrl>-C`.
 
 The next time you start up the system `docker-compose up` is enough. The `docker-hive` container uses volumes. To delete them just use `docker-compose rm -v`.
+
+# Using hive
+
+Open a browser and connect to the follwoing URLs:
+
+1. http://localhost:9870 - Webgui of Namenode
+2. http://localhost:8088 - Webgui of Yarn Resource Manger
+3. http://localhost:8188 - Webgui of Yarn Application History
+4. http://localhost:10002 - Webgui of HiveServer2
+
+Hive clients should connect to the following JDBC-URL:
+
+* jdbc:hive2://127.0.0.1:10000/;auth=noSasl
+
+E.g.:
+
+* `beeline --convertBinaryArrayToString=true --fastConnect=false -u 'jdbc:hive2://127.0.0.1:10000/;auth=noSasl'`
+
+Have fun.
